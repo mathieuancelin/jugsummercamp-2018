@@ -4,17 +4,8 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "build-admin-dev": "parcel watch src/front/admin.js --out-file admin.js --out-dir ./public/js/bundle --global Admin",
-    "build-blog-dev": "parcel watch src/front/blog.js --out-file blog.js --out-dir ./public/js/bundle --global Blog",
-    "build-web-dev": "parcel watch src/front/web.js --out-file web.js --out-dir ./public/js/bundle --global Web",
-    "build-status-dev": "parcel watch src/front/status.js --out-file status.js --out-dir ./public/js/bundle --global Status",
-    "build-dashboard-dev": "parcel watch src/front/dashboard.js --out-file dashboard.js --out-dir ./public/js/bundle --global Dashboard",
-    "build-admin": "parcel build src/front/admin.js --out-file admin.js --out-dir ./public/js/bundle --global Admin",
-    "build-blog": "parcel build src/front/blog.js --out-file blog.js --out-dir ./public/js/bundle --global Blog",
-    "build-web": "parcel build src/front/web.js --out-file web.js --out-dir ./public/js/bundle --global Web",
-    "build-status": "parcel build src/front/status.js --out-file status.js --out-dir ./public/js/bundle --global Status",
-    "build-dashboard": "parcel build src/front/dashboard.js --out-file dashboard.js --out-dir ./public/js/bundle --global Dashboard",
-    "build-front": "yarn build-blog && yarn build-admin && yarn build-public && yarn build-status && yarn build-dashboard",
+    "build-front-dev": "parcel watch src/front/index.js --out-file app.js --out-dir ./public/js/bundle --global JSC",
+    "build-front": "parcel build src/front/index.js --out-file app.js --out-dir ./public/js/bundle --global JSC",
     "start": "nodemon src/back/index.js",
     "prettier": "prettier --write --single-quote --trailing-comma es5 --print-width 100 --tab-width 2 --jsx-bracket-same-line \"src/**/*.js\""
   },
@@ -27,7 +18,6 @@
     "minimist": "1.2.0",
     "moment": "2.22.2",
     "node-fetch": "2.2.0",
-    "nodemon": "^1.18.3",
     "react": "16.4.2",
     "react-dom": "16.4.2",
     "whatwg-fetch": "2.0.4"
@@ -37,7 +27,8 @@
     "babel-preset-env": "1.7.0",
     "babel-preset-react-app": "3.1.2",
     "parcel": "1.9.7",
-    "prettier": "1.14.2"
+    "prettier": "1.14.2",
+    "nodemon": "1.18.3"
   },
   "babel": {
     "plugins": [

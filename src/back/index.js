@@ -11,7 +11,7 @@ app.use(bodyParser.json(), express.static('public'));
 if (!argv.module) {
   ['admin', 'blog', 'dashboard', 'status', 'web'].map(mod => require(`./${mod}`).route(app, argv));
   app.listen(port, () => {
-    console.log(`jugsummercamp-app listening on port ${port}!`)
+    console.log(`jugsummercamp-app listening on port ${port}!`);
   });
 } else {
   (_.isArray(argv.module) ? argv.module : [argv.module]).map(mod => {
