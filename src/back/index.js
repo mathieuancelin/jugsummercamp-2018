@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const app = express();
 
 const argv = require('minimist')(process.argv.slice(2));
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 9000;
 
 app.use(bodyParser.json(), express.static('public'));
 

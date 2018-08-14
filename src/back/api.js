@@ -36,10 +36,7 @@ function getAllSpeakers(req, res) {
 function getAllTalks(req, res) {
   getData().then(data => {
     const room = req.query.room;
-    const talks = data.presentations.map(p => {
-      p.speakers = p.speakers.map(s => s.id); 
-      return p;
-    }).filter(p => {
+    const talks = data.presentations.filter(p => {
       if (room) {
         return p.place === room;
       } else {
