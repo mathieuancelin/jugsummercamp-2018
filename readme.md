@@ -30,3 +30,10 @@ java -Dapp.privateapps.port=8080 -Dapp.domain=jsc.fr -Dapp.importFrom=./config/o
 * http://otoroshi-api.jsc.fr:8080
 * http://privateapps.jsc.fr:8080
 * http://127.0.0.1:9000
+
+## Scenario
+
+* start the classic app
+* start otoroshi
+* show the app
+

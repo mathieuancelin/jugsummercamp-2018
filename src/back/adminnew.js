@@ -153,8 +153,12 @@ function route(app, argv) {
       .send(home());
   });
   app.get('/admin/me', (req, res) => {
-    const decoded = jsonwebtoken.verify(req.get('Otoroshi-Claim'), secret);
-    res.status(200).send(decoded);
+    if (req.get('Otoroshi-Claim')) {
+      const decoded = jsonwebtoken.verify(req.get('Otoroshi-Claim'), secret);
+      res.status(200).send(decoded);
+    } else {
+      res.status(404).send({});
+    }
   });
 }
 

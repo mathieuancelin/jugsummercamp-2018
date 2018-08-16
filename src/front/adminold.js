@@ -2,8 +2,18 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
 class AdminOld extends Component {
+
+  state = {
+    me: null
+  };
+
   componentDidMount() {
     this.setup();
+    fetch('/admin/me').then(r => {
+      if (r.status === 200) {
+        r.json().then(me => this.setState({ me }));
+      }
+    });
   }
 
   setupOne = ref => {
@@ -167,7 +177,8 @@ class AdminOld extends Component {
             <div id="navbar" className="navbar-collapse collapse">
               <ul className="nav navbar-nav navbar-right">
                 <li>
-                  <a href="#">Dashboard</a>
+                  {!this.state.me && <a href="#">Dashboard</a>}
+                  {this.state.me && <a href="#">{this.state.me.issuer}</a>}
                 </li>
               </ul>
               <form className="navbar-form navbar-right">

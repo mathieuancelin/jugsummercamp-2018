@@ -56,8 +56,19 @@ const gaugeOptions = {
 };
 
 class AdminNew extends Component {
+
+
+  state = {
+    me: null
+  };
+
   componentDidMount() {
     this.setup();
+    fetch('/admin/me').then(r => {
+      if (r.status === 200) {
+        r.json().then(me => this.setState({ me }));
+      }
+    });
   }
 
   update = chart => {
@@ -151,7 +162,8 @@ class AdminNew extends Component {
             <div id="navbar" className="navbar-collapse collapse">
               <ul className="nav navbar-nav navbar-right">
                 <li>
-                  <a href="#">Dashboard</a>
+                {!this.state.me && <a href="#">Dashboard</a>}
+                {this.state.me && <a href="#">{this.state.me.issuer}</a>}
                 </li>
               </ul>
               <form className="navbar-form navbar-right">
