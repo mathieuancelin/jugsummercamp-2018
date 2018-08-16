@@ -15,7 +15,7 @@ app.use(
 );
 
 if (!argv.module) {
-  ['adminold', 'apibetaseries', 'web'].map(mod => require(`./${mod}`).route(app, argv));
+  ['admin', 'apibetaseries', 'web'].map(mod => require(`./${mod}`).route(app, argv));
   app.listen(port, () => {
     console.log(`jugsummercamp-app listening on port ${port}!`);
   });
