@@ -5,9 +5,13 @@ const TVDB = require('./utils/tvdb');
 const connected = require('./utils/connected').connected;
 
 function searchShows(req, res) {
-  TVDB.seach(req.query.name).then(series => {
-    res.status(200).send(series);
-  });
+  if (Date.now() % 2 === 0) {
+    TVDB.seach(req.query.name).then(series => {
+      res.status(200).send(series);
+    });
+  } else {
+    req.socket.destroy('I/O error !!!');
+  }
 }
 
 function getShow(req, res) {

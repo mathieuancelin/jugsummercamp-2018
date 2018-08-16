@@ -36,27 +36,31 @@ java -Dapp.privateapps.port=8080 -Dapp.domain=jsc.fr -Dapp.importFrom=./config/o
 * start the classic app
 * start otoroshi
 * show the app
-* otoroshify the app
+  * otoroshify the app
 * configure elastic
-* show otoroshi metrics
-* show kibana metrics
+  * show otoroshi metrics
+  * show kibana metrics
 * show the user dashboard with jwt token
-* add jwt token verification
+  * add jwt token verification
 * show the search api
-* otoroshify the api on api.jsc.fr and /api/shows (use additional headers with a valid JWT token from jwt.io)
-* add cors on the api
-* issue an apikey
-* test with curl
-* show metrics and quotas (via ui, and kibana)
+  * otoroshify the api on api.jsc.fr and /api/shows (use additional headers with a valid JWT token from jwt.io)
+  * add cors on the api
+  * issue an apikey
+  * test with curl
+  * show metrics and quotas (via ui, and kibana)
 * show the admin ui
-* start keycloak
-* create realm
-* create user
-* configure otoroshi auth 
-* otoroshify admin and add auth (expose on other domain and use snow monkey to create a redirect ???)
-* show that your name appears at top right
-* show snowmonkey ??? and try it on the api ???
-* swap api with tvdb implementation
+  * start keycloak
+    * create realm
+    * create user
+  * configure otoroshi auth 
+  * otoroshify admin and add auth 
+  * expose admin on `admin.jsc.fr` other domain and use snow monkey to create a redirect ???
+  * show that your name appears at top right
+* show snowmonkey and try it on the api
+  * remove user facing from public patterns (in oto)
+  * add retries js side
+* swap api with tvdb implementation 
+  * introduce fake network errors with node to show circuit breaker ?
 * swap admin ui with new implementation
 * swap home with new theme
 * stop old app

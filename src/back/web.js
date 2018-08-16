@@ -167,6 +167,9 @@ function route(app, argv) {
   app.delete('/api/me/:serieId', connected, deleteSerie);
   app.post('/api/me/:serieId/episodes/:episodeId', connected, markEpisode); // ?watched=true
   app.post('/api/me/:serieId/seasons/:seasonNumber', connected, markSeason); // ?watched=true
+  app.get('/failure', (req, res) => {
+    req.socket.destroy('I/O fuuuu');
+  });
 }
 
 function start(argv, port = 9095) {
