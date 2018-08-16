@@ -12,12 +12,14 @@ function searchShows(req, res) {
 
 function getShow(req, res) {
   const id = req.params.id;
-  BetaSeries.get(id).then(show => {
-    res.status(200).send(show);
-  }).catch(e => {
-    res.status(404).send({ error: 'show not found' });
-  });
-} 
+  BetaSeries.get(id)
+    .then(show => {
+      res.status(200).send(show);
+    })
+    .catch(e => {
+      res.status(404).send({ error: 'show not found' });
+    });
+}
 
 function route(app, argv) {
   app.get('/api/shows/_search', connected, searchShows);

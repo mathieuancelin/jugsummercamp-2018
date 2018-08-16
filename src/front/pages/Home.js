@@ -1,12 +1,11 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import { TopBar } from './Layout';
 import * as Service from '../services';
 
 export class Home extends Component {
-
   state = {
-    user: null
-  }
+    user: null,
+  };
 
   componentDidMount() {
     Service.me().then(user => this.setState({ user }));
@@ -29,4 +28,4 @@ export class Home extends Component {
       </div>
     );
   }
-} 
+}

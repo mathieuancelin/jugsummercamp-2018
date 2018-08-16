@@ -7,7 +7,12 @@ const app = express();
 const argv = require('minimist')(process.argv.slice(2));
 const port = process.env.PORT || 9000;
 
-app.use(cookieParser(), bodyParser.json(), bodyParser.urlencoded({ extended: false }), express.static('public'));
+app.use(
+  cookieParser(),
+  bodyParser.json(),
+  bodyParser.urlencoded({ extended: false }),
+  express.static('public')
+);
 
 if (!argv.module) {
   ['adminold', 'apibetaseries', 'web'].map(mod => require(`./${mod}`).route(app, argv));

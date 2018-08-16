@@ -33,13 +33,18 @@ function home() {
     <body>
       <div id="app"></div>
       <script src="/js/bundle/app.js"></script>
-      <script>JSC.init(document.getElementById("app"))</script>
+      <script>JSC.initDasboard(document.getElementById("app"))</script>
     </body>
   </html>`;
 }
 
 function login(req, res) {
-  res.cookie('user', jsonwebtoken.sign({ email: req.body.email, name: "John Doe" }, secret), { path: '/' }).status(200).send({ done: true });
+  res
+    .cookie('user', jsonwebtoken.sign({ email: req.body.email, name: 'John Doe' }, secret), {
+      path: '/',
+    })
+    .status(200)
+    .send({ done: true });
 }
 
 function getMe(req, res) {
@@ -47,7 +52,7 @@ function getMe(req, res) {
     users[req.jwt.email] = {
       userId: req.jwt.email,
       profile: req.jwt,
-      shows: []
+      shows: [],
     };
   }
   res.status(200).send(users[req.jwt.email]);
@@ -58,19 +63,21 @@ function addSerie(req, res) {
   const user = users[req.jwt.email];
   const alreadyExists = !!_.find(user.shows, s => s.id === serieId);
   if (!alreadyExists) {
-    console.log(req.body)
+    console.log(req.body);
     if (req.body && req.body.id) {
-      users[req.jwt.email].shows.push(req.body)
+      users[req.jwt.email].shows.push(req.body);
       res.status(200).send(users[req.jwt.email]);
     } else {
-      console.log('Should not pass here !!!')
-      BetaSeries.get(serieId).then(serie => {
-        users[req.jwt.email].shows.push(serie)
-        res.status(200).send(users[req.jwt.email]);
-      }).catch(e => {
-        console.log(e);
-        res.status(500).send({ error: e.message });
-      });
+      console.log('Should not pass here !!!');
+      BetaSeries.get(serieId)
+        .then(serie => {
+          users[req.jwt.email].shows.push(serie);
+          res.status(200).send(users[req.jwt.email]);
+        })
+        .catch(e => {
+          console.log(e);
+          res.status(500).send({ error: e.message });
+        });
     }
   } else {
     res.status(200).send(users[req.jwt.email]);
@@ -100,7 +107,7 @@ function markEpisode(req, res) {
         });
         return season;
       });
-    } 
+    }
     return s;
   });
   res.status(200).send(users[req.jwt.email]);
@@ -122,7 +129,7 @@ function markSeason(req, res) {
         }
         return season;
       });
-    } 
+    }
     return s;
   });
   res.status(200).send(users[req.jwt.email]);
@@ -155,16 +162,21 @@ function route(app, argv) {
   });
   app.post('/api/login', login);
   // me api
-  app.get('/api/me', connected, getMe)
-  app.post("/api/me/:serieId", connected, addSerie)
-  app.delete("/api/me/:serieId", connected, deleteSerie)
-  app.post("/api/me/:serieId/episodes/:episodeId", connected, markEpisode) // ?watched=true
-  app.post("/api/me/:serieId/seasons/:seasonNumber", connected, markSeason)// ?watched=true
+  app.get('/api/me', connected, getMe);
+  app.post('/api/me/:serieId', connected, addSerie);
+  app.delete('/api/me/:serieId', connected, deleteSerie);
+  app.post('/api/me/:serieId/episodes/:episodeId', connected, markEpisode); // ?watched=true
+  app.post('/api/me/:serieId/seasons/:seasonNumber', connected, markSeason); // ?watched=true
 }
 
 function start(argv, port = 9095) {
   const internalApp = express();
-  internalApp.use(cookieParser(), bodyParser.json(), bodyParser.urlencoded({ extended: false }), express.static('public'));
+  internalApp.use(
+    cookieParser(),
+    bodyParser.json(),
+    bodyParser.urlencoded({ extended: false }),
+    express.static('public')
+  );
   route(internalApp, argv);
   internalApp.listen(port, () => {
     console.log(`jugsummercamp-web listening on port ${port}!`);

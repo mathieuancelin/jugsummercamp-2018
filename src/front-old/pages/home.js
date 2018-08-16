@@ -7,15 +7,16 @@ import { Cell } from '../components/cell';
 import _ from 'lodash';
 
 export class Home extends Component {
-
   state = {
-    talks: []
+    talks: [],
   };
 
   componentDidMount() {
-    fetch('/api/talks').then(r => r.json()).then(talks => {
-      this.setState({ talks: _.orderBy(talks, t => t['start-date']) });
-    });
+    fetch('/api/talks')
+      .then(r => r.json())
+      .then(talks => {
+        this.setState({ talks: _.orderBy(talks, t => t['start-date']) });
+      });
   }
 
   render() {
@@ -57,19 +58,23 @@ export class Home extends Component {
                   </b>{' '}
                 </p>
               </div>
-              {this.state.talks.length > 0 && <div className="col-sm-8">
-                <div className="panel panel-default">
-                  <div className="panel-heading">Les thèmes retenus&nbsp;:</div>
-                  <ul className="list-group">
-                    {this.state.talks.map(talk => <Cell talk={talk} />)}
-                  </ul>
+              {this.state.talks.length > 0 && (
+                <div className="col-sm-8">
+                  <div className="panel panel-default">
+                    <div className="panel-heading">Les thèmes retenus&nbsp;:</div>
+                    <ul className="list-group">
+                      {this.state.talks.map(talk => (
+                        <Cell talk={talk} />
+                      ))}
+                    </ul>
+                  </div>
+                  <div>
+                    <a className="btn btn-primary pull-right" href="/planning">
+                      <i className="fa fa-calendar" /> Consulter le planning
+                    </a>
+                  </div>
                 </div>
-                <div>
-                  <a className="btn btn-primary pull-right" href="/planning">
-                    <i className="fa fa-calendar" /> Consulter le planning
-                  </a>
-                </div>
-              </div>}
+              )}
             </div>
           </div>
 
@@ -83,7 +88,7 @@ export class Home extends Component {
                     <img
                       className="img-advertising"
                       src="http://serli-fr.s3.amazonaws.com/JugSummerCamp/logo-serli-bl-fdtransparent.png"
-                      style={{ paddingLeft: 10, paddingRight: 10 }}
+                      style={{ paddingLeft: 10, paddingRight: 10 }}
                     />
                   </a>
 
@@ -91,7 +96,7 @@ export class Home extends Component {
                     <img
                       className="img-advertising"
                       src="http://serli-fr.s3.amazonaws.com/JugSummerCamp/GitHub_Logo_300px.png"
-                      style={{ paddingLeft: 10, paddingRight: 10 }}
+                      style={{ paddingLeft: 10, paddingRight: 10 }}
                     />
                   </a>
 
@@ -99,7 +104,7 @@ export class Home extends Component {
                     <img
                       className="img-advertising"
                       src="https://serli-fr.s3.amazonaws.com/JugSummerCamp/clevercloud.png"
-                      style={{ paddingLeft: 10, paddingRight: 10 }}
+                      style={{ paddingLeft: 10, paddingRight: 10 }}
                     />
                   </a>
 
@@ -107,7 +112,7 @@ export class Home extends Component {
                     <img
                       className="img-advertising"
                       src="https://lh3.googleusercontent.com/-GCDz_7Cok3g/Vw-WxUFol-I/AAAAAAAAAkU/VwkFq7WQLOofRQcwMyVR1GF5FxCEVvHkwCCo/s300-Ic42/elastic-logo300px.png"
-                      style={{ paddingLeft: 10, paddingRight: 10 }}
+                      style={{ paddingLeft: 10, paddingRight: 10 }}
                     />
                   </a>
 
@@ -115,7 +120,7 @@ export class Home extends Component {
                     <img
                       className="img-advertising"
                       src="http://serli-fr.s3.amazonaws.com/JugSummerCamp/sonarsource-logo.png"
-                      style={{ paddingLeft: 10, paddingRight: 10 }}
+                      style={{ paddingLeft: 10, paddingRight: 10 }}
                     />
                   </a>
 
@@ -123,7 +128,7 @@ export class Home extends Component {
                     <img
                       className="img-advertising"
                       src="https://serli-fr.s3.amazonaws.com/JugSummerCamp/saagie-logo-red-200.png"
-                      style={{ paddingLeft: 10, paddingRight: 10 }}
+                      style={{ paddingLeft: 10, paddingRight: 10 }}
                     />
                   </a>
                 </div>

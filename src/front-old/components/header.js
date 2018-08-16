@@ -24,7 +24,10 @@ export class Header extends Component {
               </button>
             </div>
             <a href="" id="logo">
-              <img src="http://www.jugsummercamp.org/assets/images/logo-summercamp.png" className="img-responsive" />
+              <img
+                src="http://www.jugsummercamp.org/assets/images/logo-summercamp.png"
+                className="img-responsive"
+              />
             </a>
             <div className="collapse navbar-collapse" id="top-menu">
               <ul className="nav navbar-nav" role="menu">

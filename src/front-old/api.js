@@ -4,18 +4,26 @@ const fetch = require('node-fetch');
 const _ = require('lodash');
 
 function getData() {
-  return fetch('http://www.jugsummercamp.org/api/edition/9').then(r => r.json()).then(r => {
-    // console.log(JSON.stringify(r, null, 2))
-    return r;
-  });
+  return fetch('http://www.jugsummercamp.org/api/edition/9')
+    .then(r => r.json())
+    .then(r => {
+      // console.log(JSON.stringify(r, null, 2))
+      return r;
+    });
 }
 
 function getSpeaker(req, res) {
   const id = req.params.id;
   getData().then(data => {
-    const speaker = _.findLast(_.uniqBy(_.flatMap(data.presentations, pres => {
-      return pres.speakers;
-    }), a => a.id), a => String(a.id) === id);
+    const speaker = _.findLast(
+      _.uniqBy(
+        _.flatMap(data.presentations, pres => {
+          return pres.speakers;
+        }),
+        a => a.id
+      ),
+      a => String(a.id) === id
+    );
     if (speaker) {
       res.status(200).send(speaker);
     } else {
@@ -26,9 +34,12 @@ function getSpeaker(req, res) {
 
 function getAllSpeakers(req, res) {
   getData().then(data => {
-    const speakers = _.uniqBy(_.flatMap(data.presentations, pres => {
-      return pres.speakers;
-    }), a => a.id);
+    const speakers = _.uniqBy(
+      _.flatMap(data.presentations, pres => {
+        return pres.speakers;
+      }),
+      a => a.id
+    );
     res.status(200).send(speakers);
   });
 }
