@@ -1,0 +1,1172 @@
+{
+  "label": "Otoroshi export",
+  "dateRaw": 1534450473422,
+  "date": "2018-08-16 10:14:33",
+  "stats": {
+    "calls": 1386,
+    "dataIn": 68385,
+    "dataOut": 4980257
+  },
+  "config": {
+    "lines": [
+      "prod"
+    ],
+    "streamEntityOnly": true,
+    "autoLinkToDefaultGroup": true,
+    "limitConcurrentRequests": false,
+    "maxConcurrentRequests": 100000,
+    "maxHttp10ResponseSize": 4194304,
+    "useCircuitBreakers": true,
+    "apiReadOnly": false,
+    "u2fLoginOnly": false,
+    "ipFiltering": {
+      "whitelist": [],
+      "blacklist": []
+    },
+    "throttlingQuota": 100000,
+    "perIpThrottlingQuota": 100000,
+    "analyticsEventsUrl": {
+      "url": "http://ingester.jsc.fr:8889/api/v1/events",
+      "headers": {
+        "foo": "bar"
+      }
+    },
+    "analyticsWebhooks": [
+      {
+        "url": "http://ingester.jsc.fr:8889/api/v1/events",
+        "headers": {}
+      }
+    ],
+    "alertsWebhooks": [],
+    "alertsEmails": [],
+    "endlessIpAddresses": [],
+    "statsdConfig": null,
+    "kafkaConfig": null,
+    "backOfficeAuthRef": null,
+    "mailGunSettings": null,
+    "cleverSettings": null,
+    "maxWebhookSize": 100,
+    "middleFingers": false,
+    "maxLogsSize": 10000,
+    "otoroshiId": "otoroshi-jsc",
+    "snowMonkeyConfig": {
+      "enabled": false,
+      "outageStrategy": "OneServicePerGroup",
+      "includeUserFacingDescriptors": false,
+      "dryRun": false,
+      "timesPerDay": 1,
+      "startTime": "09:00:00.000",
+      "stopTime": "23:59:59.000",
+      "outageDurationFrom": 600000,
+      "outageDurationTo": 3600000,
+      "targetGroups": [],
+      "chaosConfig": {
+        "enabled": true,
+        "largeRequestFaultConfig": {
+          "ratio": 0.2,
+          "additionalRequestSize": 0
+        },
+        "largeResponseFaultConfig": {
+          "ratio": 0.2,
+          "additionalResponseSize": 0
+        },
+        "latencyInjectionFaultConfig": {
+          "ratio": 0.2,
+          "from": 500,
+          "to": 5000
+        },
+        "badResponsesFaultConfig": {
+          "ratio": 0.2,
+          "responses": [
+            {
+              "status": 502,
+              "body": "{\"error\":\"Nihonzaru everywhere ...\"}",
+              "headers": {
+                "Content-Type": "application/json"
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  "appConfig": {
+    "actorsystems": {
+      "datastore": {
+        "akka": {
+          "default-dispatcher": {
+            "executor": "fork-join-executor",
+            "fork-join-executor": {
+              "parallelism-factor": 4,
+              "parallelism-max": 64,
+              "parallelism-min": 4,
+              "task-peeking-mode": "FIFO"
+            },
+            "throughput": 1,
+            "type": "Dispatcher"
+          },
+          "jvm-exit-on-fatal-error": false,
+          "log-dead-letters-during-shutdown": false
+        }
+      },
+      "otoroshi": {
+        "akka": {
+          "default-dispatcher": {
+            "executor": "fork-join-executor",
+            "fork-join-executor": {
+              "parallelism-factor": 4,
+              "parallelism-max": 64,
+              "parallelism-min": 4,
+              "task-peeking-mode": "FIFO"
+            },
+            "throughput": 1,
+            "type": "Dispatcher"
+          },
+          "jvm-exit-on-fatal-error": false,
+          "log-dead-letters-during-shutdown": false
+        }
+      }
+    },
+    "adminapi": {
+      "defaultValues": {
+        "backOfficeApiKeyClientId": "admin-api-apikey-id",
+        "backOfficeApiKeyClientSecret": "admin-api-apikey-secret",
+        "backOfficeGroupId": "admin-api-group",
+        "backOfficeServiceId": "admin-api-service"
+      },
+      "exposed": true,
+      "exposedSubdomain": "otoroshi-api",
+      "proxy": {
+        "https": false,
+        "local": true
+      },
+      "targetSubdomain": "otoroshi-admin-internal-api"
+    },
+    "backoffice": {
+      "exposed": true,
+      "session": {
+        "exp": 86400000
+      },
+      "subdomain": "otoroshi"
+    },
+    "cassandra": {
+      "host": "127.0.0.1",
+      "hosts": "127.0.0.1",
+      "port": 9042,
+      "replicationFactor": 1,
+      "windowSize": 99
+    },
+    "checkForUpdates": true,
+    "claim": {
+      "sharedKey": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCu5JuZTsUeqzIFbXHBUJxp5HyGOT9jmljwc8/W1QAoaT2thrXzJpTL5bSiIZs8JJhjKwI4+m9LreXboa/miEGGHQSbShsvtuXbtWW3ZvEHBlUFU+gc0WIK8RHnntQaS7aeeLsXyNiJ2qHJZiBmk35lFgTcqXrrVlaOOPZ+vS/TOQIDAQAB"
+    },
+    "commitId": "HEAD",
+    "domain": "jsc.fr",
+    "env": "prod",
+    "events": {
+      "maxSize": 1000
+    },
+    "eventsName": "otoroshi",
+    "health": {
+      "limit": 1000
+    },
+    "importFrom": "./config/otoroshi.json",
+    "inmemory": {
+      "experimental": false,
+      "windowSize": 99
+    },
+    "kafka": {
+      "groupId": "otoroshi",
+      "host": "127.0.0.1",
+      "keystore": {},
+      "nbPartitions": 3,
+      "port": "9092",
+      "servers": "127.0.0.1:9092",
+      "truststore": {}
+    },
+    "leveldb": {
+      "path": "./leveldb",
+      "windowSize": 99
+    },
+    "middleFingers": false,
+    "mongo": {
+      "uri": "mongodb://localhost:27017/default",
+      "windowSize": 99
+    },
+    "overheadThreshold": 500,
+    "privateapps": {
+      "port": "8080",
+      "session": {
+        "exp": 86400000
+      },
+      "subdomain": "privateapps"
+    },
+    "redirectToDev": false,
+    "redis": {
+      "host": "localhost",
+      "port": 6379,
+      "slaves": [],
+      "useScan": false,
+      "windowSize": 99
+    },
+    "rootScheme": "http",
+    "sidecar": {
+      "apikey": {},
+      "from": "127.0.0.1",
+      "strict": true
+    },
+    "snowflake": {
+      "seed": 0
+    },
+    "storage": "inmemory",
+    "storageRoot": "otoroshi",
+    "throttlingWindow": 10,
+    "useCache": false,
+    "webhooks": {
+      "size": "20"
+    },
+    "workers": 30
+  },
+  "admins": [],
+  "simpleAdmins": [
+    {
+      "username": "admin@otoroshi.io",
+      "password": "$2a$10$eWVP6A6Jsz0DNMF7Q6Kf5.R2KvCLaT7W6e0rOCOxawORiI0KLUQdS",
+      "label": "Otoroshi Admin",
+      "authorizedGroup": null,
+      "createdAt": 1527155236862
+    }
+  ],
+  "serviceGroups": [
+    {
+      "id": "admin-api-group",
+      "name": "Otoroshi Admin Api group",
+      "description": "No description"
+    },
+    {
+      "id": "default",
+      "name": "default-group",
+      "description": "The default service group"
+    },
+    {
+      "id": "wfy9a7i6lwu7al85fbrwg1u9815957hhoq5wm19sl874jwlvfno7m8nm5tp5rev4",
+      "name": "shows-api",
+      "description": "Group named shows-api"
+    }
+  ],
+  "apiKeys": [
+    {
+      "clientId": "admin-api-apikey-id",
+      "clientSecret": "admin-api-apikey-secret",
+      "clientName": "Otoroshi Backoffice ApiKey",
+      "authorizedGroup": "admin-api-group",
+      "enabled": true,
+      "throttlingQuota": 10000000,
+      "dailyQuota": 10000000,
+      "monthlyQuota": 10000000,
+      "metadata": {}
+    },
+    {
+      "clientId": "31j782qwd4crz6sy",
+      "clientSecret": "2nj8r64a9512obv7rgi1t33phf6qpxjf0a0h3i58t8t50tm7jkai62lwk9zzte0a",
+      "clientName": "Test apikey",
+      "authorizedGroup": "wfy9a7i6lwu7al85fbrwg1u9815957hhoq5wm19sl874jwlvfno7m8nm5tp5rev4",
+      "enabled": true,
+      "throttlingQuota": 100,
+      "dailyQuota": 1000000,
+      "monthlyQuota": 1000000000000000000,
+      "metadata": {}
+    }
+  ],
+  "serviceDescriptors": [
+    {
+      "id": "5hsmlXIXlNYAg9W3xYfJSoLSCMAYRwmfubRsv6AhqHnmQnSBGR3Q9kAZkjITyhuE",
+      "groupId": "default",
+      "name": "admin",
+      "env": "prod",
+      "domain": "jsc.fr",
+      "subdomain": "www",
+      "targets": [
+        {
+          "host": "127.0.0.1:9000",
+          "scheme": "http"
+        }
+      ],
+      "root": "/admin",
+      "matchingRoot": "/admin",
+      "localHost": "localhost:8080",
+      "localScheme": "http",
+      "redirectToLocal": false,
+      "enabled": true,
+      "userFacing": false,
+      "privateApp": true,
+      "forceHttps": false,
+      "maintenanceMode": false,
+      "buildMode": false,
+      "strictlyPrivate": false,
+      "enforceSecureCommunication": true,
+      "sendOtoroshiHeadersBack": true,
+      "secComExcludedPatterns": [],
+      "securityExcludedPatterns": [],
+      "publicPatterns": [
+        "/.*"
+      ],
+      "privatePatterns": [],
+      "additionalHeaders": {},
+      "matchingHeaders": {},
+      "ipFiltering": {
+        "whitelist": [],
+        "blacklist": []
+      },
+      "api": {
+        "exposeApi": false
+      },
+      "healthCheck": {
+        "enabled": false,
+        "url": "/"
+      },
+      "clientConfig": {
+        "useCircuitBreaker": true,
+        "retries": 1,
+        "maxErrors": 20,
+        "retryInitialDelay": 50,
+        "backoffFactor": 2,
+        "callTimeout": 30000,
+        "globalTimeout": 30000,
+        "sampleInterval": 2000
+      },
+      "canary": {
+        "enabled": false,
+        "traffic": 0.2,
+        "targets": [],
+        "root": "/"
+      },
+      "metadata": {},
+      "chaosConfig": {
+        "enabled": false,
+        "largeRequestFaultConfig": {
+          "ratio": 0.2,
+          "additionalRequestSize": 0
+        },
+        "largeResponseFaultConfig": {
+          "ratio": 0.2,
+          "additionalResponseSize": 0
+        },
+        "latencyInjectionFaultConfig": {
+          "ratio": 0.2,
+          "from": 0,
+          "to": 0
+        },
+        "badResponsesFaultConfig": {
+          "ratio": 0.2,
+          "responses": []
+        }
+      },
+      "jwtVerifier": {
+        "type": "local",
+        "enabled": false,
+        "strict": true,
+        "excludedPatterns": [],
+        "source": {
+          "type": "InHeader",
+          "name": "X-JWT-Token",
+          "remove": ""
+        },
+        "algoSettings": {
+          "type": "HSAlgoSettings",
+          "size": 512,
+          "secret": "secret"
+        },
+        "strategy": {
+          "type": "PassThrough",
+          "verificationSettings": {
+            "fields": {
+              "iss": "The Issuer"
+            }
+          }
+        }
+      },
+      "secComSettings": {
+        "type": "HSAlgoSettings",
+        "size": 256,
+        "secret": "secret"
+      },
+      "cors": {
+        "enabled": false,
+        "allowOrigin": "*",
+        "exposeHeaders": [],
+        "allowHeaders": [],
+        "allowMethods": [],
+        "excludedPatterns": [],
+        "maxAge": null,
+        "allowCredentials": true
+      },
+      "authConfigRef": "e2vwr9aazwalbys829ui050dij86zhvqm4tft6xrkrx5espgzn3f8gqc693u5b8b"
+    },
+    {
+      "id": "gEMD138FkoAmbS8toG0AfhqBg4ti2idOjGYZzywfGazp0X5k1ZaubKed4W2l4maP",
+      "groupId": "default",
+      "name": "api-front",
+      "env": "prod",
+      "domain": "jsc.fr",
+      "subdomain": "www",
+      "targets": [
+        {
+          "host": "127.0.0.1:9000",
+          "scheme": "http"
+        }
+      ],
+      "root": "/api/shows",
+      "matchingRoot": "/api/shows",
+      "localHost": "localhost:8080",
+      "localScheme": "http",
+      "redirectToLocal": false,
+      "enabled": true,
+      "userFacing": false,
+      "privateApp": false,
+      "forceHttps": false,
+      "maintenanceMode": false,
+      "buildMode": false,
+      "strictlyPrivate": false,
+      "enforceSecureCommunication": false,
+      "sendOtoroshiHeadersBack": true,
+      "secComExcludedPatterns": [],
+      "securityExcludedPatterns": [],
+      "publicPatterns": [
+        "/.*"
+      ],
+      "privatePatterns": [],
+      "additionalHeaders": {},
+      "matchingHeaders": {},
+      "ipFiltering": {
+        "whitelist": [],
+        "blacklist": []
+      },
+      "api": {
+        "exposeApi": false
+      },
+      "healthCheck": {
+        "enabled": false,
+        "url": "/"
+      },
+      "clientConfig": {
+        "useCircuitBreaker": true,
+        "retries": 1,
+        "maxErrors": 20,
+        "retryInitialDelay": 50,
+        "backoffFactor": 2,
+        "callTimeout": 30000,
+        "globalTimeout": 30000,
+        "sampleInterval": 2000
+      },
+      "canary": {
+        "enabled": false,
+        "traffic": 0.2,
+        "targets": [],
+        "root": "/"
+      },
+      "metadata": {},
+      "chaosConfig": {
+        "enabled": false,
+        "largeRequestFaultConfig": {
+          "ratio": 0.2,
+          "additionalRequestSize": 0
+        },
+        "largeResponseFaultConfig": {
+          "ratio": 0.2,
+          "additionalResponseSize": 0
+        },
+        "latencyInjectionFaultConfig": {
+          "ratio": 0.2,
+          "from": 0,
+          "to": 0
+        },
+        "badResponsesFaultConfig": {
+          "ratio": 0.2,
+          "responses": []
+        }
+      },
+      "jwtVerifier": {
+        "type": "local",
+        "enabled": true,
+        "strict": true,
+        "excludedPatterns": [],
+        "source": {
+          "type": "InCookie",
+          "name": "user"
+        },
+        "algoSettings": {
+          "type": "HSAlgoSettings",
+          "size": 256,
+          "secret": "secret"
+        },
+        "strategy": {
+          "type": "PassThrough",
+          "verificationSettings": {
+            "fields": {}
+          }
+        }
+      },
+      "secComSettings": {
+        "type": "HSAlgoSettings",
+        "size": 512,
+        "secret": "${config.app.claim.sharedKey}"
+      },
+      "cors": {
+        "enabled": false,
+        "allowOrigin": "*",
+        "exposeHeaders": [],
+        "allowHeaders": [],
+        "allowMethods": [],
+        "excludedPatterns": [],
+        "maxAge": null,
+        "allowCredentials": true
+      },
+      "authConfigRef": null
+    },
+    {
+      "id": "admin-api-service",
+      "groupId": "admin-api-group",
+      "name": "otoroshi-admin-api",
+      "env": "prod",
+      "domain": "jsc.fr",
+      "subdomain": "otoroshi-api",
+      "targets": [
+        {
+          "host": "127.0.0.1:8080",
+          "scheme": "http"
+        }
+      ],
+      "root": "/",
+      "matchingRoot": null,
+      "localHost": "127.0.0.1:8080",
+      "localScheme": "http",
+      "redirectToLocal": false,
+      "enabled": true,
+      "userFacing": false,
+      "privateApp": false,
+      "forceHttps": false,
+      "maintenanceMode": false,
+      "buildMode": false,
+      "strictlyPrivate": false,
+      "enforceSecureCommunication": true,
+      "sendOtoroshiHeadersBack": true,
+      "secComExcludedPatterns": [],
+      "securityExcludedPatterns": [],
+      "publicPatterns": [],
+      "privatePatterns": [],
+      "additionalHeaders": {
+        "Host": "otoroshi-admin-internal-api.jsc.fr"
+      },
+      "matchingHeaders": {},
+      "ipFiltering": {
+        "whitelist": [],
+        "blacklist": []
+      },
+      "api": {
+        "exposeApi": false
+      },
+      "healthCheck": {
+        "enabled": false,
+        "url": "/"
+      },
+      "clientConfig": {
+        "useCircuitBreaker": true,
+        "retries": 1,
+        "maxErrors": 20,
+        "retryInitialDelay": 50,
+        "backoffFactor": 2,
+        "callTimeout": 30000,
+        "globalTimeout": 30000,
+        "sampleInterval": 2000
+      },
+      "canary": {
+        "enabled": false,
+        "traffic": 0.2,
+        "targets": [],
+        "root": "/"
+      },
+      "metadata": {},
+      "chaosConfig": {
+        "enabled": false,
+        "largeRequestFaultConfig": {
+          "ratio": 0.2,
+          "additionalRequestSize": 0
+        },
+        "largeResponseFaultConfig": {
+          "ratio": 0.2,
+          "additionalResponseSize": 0
+        },
+        "latencyInjectionFaultConfig": {
+          "ratio": 0.2,
+          "from": 0,
+          "to": 0
+        },
+        "badResponsesFaultConfig": {
+          "ratio": 0.2,
+          "responses": []
+        }
+      },
+      "jwtVerifier": {
+        "type": "local",
+        "enabled": false,
+        "strict": true,
+        "excludedPatterns": [],
+        "source": {
+          "type": "InHeader",
+          "name": "X-JWT-Token",
+          "remove": ""
+        },
+        "algoSettings": {
+          "type": "HSAlgoSettings",
+          "size": 512,
+          "secret": "secret"
+        },
+        "strategy": {
+          "type": "PassThrough",
+          "verificationSettings": {
+            "fields": {
+              "iss": "The Issuer"
+            }
+          }
+        }
+      },
+      "secComSettings": {
+        "type": "HSAlgoSettings",
+        "size": 512,
+        "secret": "${config.app.claim.sharedKey}"
+      },
+      "cors": {
+        "enabled": false,
+        "allowOrigin": "*",
+        "exposeHeaders": [],
+        "allowHeaders": [],
+        "allowMethods": [],
+        "excludedPatterns": [],
+        "maxAge": null,
+        "allowCredentials": true
+      },
+      "authConfigRef": null
+    },
+    {
+      "id": "LfcsLZbSZ5A7esC3yiQJjoRP5BYlZPUo6diTXF62lJ1ZWR1HXl5iE97VHeLw1Bie",
+      "groupId": "default",
+      "name": "dashboard",
+      "env": "prod",
+      "domain": "jsc.fr",
+      "subdomain": "www",
+      "targets": [
+        {
+          "host": "127.0.0.1:9000",
+          "scheme": "http"
+        }
+      ],
+      "root": "/dashboard",
+      "matchingRoot": "/dashboard",
+      "localHost": "localhost:8080",
+      "localScheme": "http",
+      "redirectToLocal": false,
+      "enabled": true,
+      "userFacing": false,
+      "privateApp": false,
+      "forceHttps": false,
+      "maintenanceMode": false,
+      "buildMode": false,
+      "strictlyPrivate": false,
+      "enforceSecureCommunication": false,
+      "sendOtoroshiHeadersBack": true,
+      "secComExcludedPatterns": [],
+      "securityExcludedPatterns": [],
+      "publicPatterns": [
+        "/.*"
+      ],
+      "privatePatterns": [],
+      "additionalHeaders": {},
+      "matchingHeaders": {},
+      "ipFiltering": {
+        "whitelist": [],
+        "blacklist": []
+      },
+      "api": {
+        "exposeApi": false
+      },
+      "healthCheck": {
+        "enabled": false,
+        "url": "/"
+      },
+      "clientConfig": {
+        "useCircuitBreaker": true,
+        "retries": 1,
+        "maxErrors": 20,
+        "retryInitialDelay": 50,
+        "backoffFactor": 2,
+        "callTimeout": 30000,
+        "globalTimeout": 30000,
+        "sampleInterval": 2000
+      },
+      "canary": {
+        "enabled": false,
+        "traffic": 0.2,
+        "targets": [],
+        "root": "/"
+      },
+      "metadata": {},
+      "chaosConfig": {
+        "enabled": false,
+        "largeRequestFaultConfig": {
+          "ratio": 0.2,
+          "additionalRequestSize": 0
+        },
+        "largeResponseFaultConfig": {
+          "ratio": 0.2,
+          "additionalResponseSize": 0
+        },
+        "latencyInjectionFaultConfig": {
+          "ratio": 0.2,
+          "from": 0,
+          "to": 0
+        },
+        "badResponsesFaultConfig": {
+          "ratio": 0.2,
+          "responses": []
+        }
+      },
+      "jwtVerifier": {
+        "type": "local",
+        "enabled": true,
+        "strict": true,
+        "excludedPatterns": [],
+        "source": {
+          "type": "InCookie",
+          "name": "user"
+        },
+        "algoSettings": {
+          "type": "HSAlgoSettings",
+          "size": 256,
+          "secret": "secret"
+        },
+        "strategy": {
+          "type": "PassThrough",
+          "verificationSettings": {
+            "fields": {}
+          }
+        }
+      },
+      "secComSettings": {
+        "type": "HSAlgoSettings",
+        "size": 512,
+        "secret": "${config.app.claim.sharedKey}"
+      },
+      "cors": {
+        "enabled": false,
+        "allowOrigin": "*",
+        "exposeHeaders": [],
+        "allowHeaders": [],
+        "allowMethods": [],
+        "excludedPatterns": [],
+        "maxAge": null,
+        "allowCredentials": true
+      },
+      "authConfigRef": null
+    },
+    {
+      "id": "GgGfedaKEAWD1eNTtoMJcWtURwZPpPizCypFzAEwIiQwRvevPSDCKTLpadDFdGep",
+      "groupId": "default",
+      "name": "admin-solo",
+      "env": "prod",
+      "domain": "jsc.fr",
+      "subdomain": "admin",
+      "targets": [
+        {
+          "host": "127.0.0.1:9000",
+          "scheme": "http"
+        }
+      ],
+      "root": "/admin",
+      "matchingRoot": null,
+      "localHost": "localhost:8080",
+      "localScheme": "http",
+      "redirectToLocal": false,
+      "enabled": true,
+      "userFacing": false,
+      "privateApp": true,
+      "forceHttps": false,
+      "maintenanceMode": false,
+      "buildMode": false,
+      "strictlyPrivate": false,
+      "enforceSecureCommunication": true,
+      "sendOtoroshiHeadersBack": false,
+      "secComExcludedPatterns": [],
+      "securityExcludedPatterns": [],
+      "publicPatterns": [
+        "/.*"
+      ],
+      "privatePatterns": [],
+      "additionalHeaders": {},
+      "matchingHeaders": {},
+      "ipFiltering": {
+        "whitelist": [],
+        "blacklist": []
+      },
+      "api": {
+        "exposeApi": false
+      },
+      "healthCheck": {
+        "enabled": false,
+        "url": "/"
+      },
+      "clientConfig": {
+        "useCircuitBreaker": true,
+        "retries": 1,
+        "maxErrors": 20,
+        "retryInitialDelay": 50,
+        "backoffFactor": 2,
+        "callTimeout": 30000,
+        "globalTimeout": 30000,
+        "sampleInterval": 2000
+      },
+      "canary": {
+        "enabled": false,
+        "traffic": 0.2,
+        "targets": [],
+        "root": "/"
+      },
+      "metadata": {},
+      "chaosConfig": {
+        "enabled": false,
+        "largeRequestFaultConfig": {
+          "ratio": 0.2,
+          "additionalRequestSize": 0
+        },
+        "largeResponseFaultConfig": {
+          "ratio": 0.2,
+          "additionalResponseSize": 0
+        },
+        "latencyInjectionFaultConfig": {
+          "ratio": 0.2,
+          "from": 0,
+          "to": 0
+        },
+        "badResponsesFaultConfig": {
+          "ratio": 0.2,
+          "responses": []
+        }
+      },
+      "jwtVerifier": {
+        "type": "local",
+        "enabled": false,
+        "strict": true,
+        "excludedPatterns": [],
+        "source": {
+          "type": "InHeader",
+          "name": "X-JWT-Token",
+          "remove": ""
+        },
+        "algoSettings": {
+          "type": "HSAlgoSettings",
+          "size": 512,
+          "secret": "secret"
+        },
+        "strategy": {
+          "type": "PassThrough",
+          "verificationSettings": {
+            "fields": {
+              "iss": "The Issuer"
+            }
+          }
+        }
+      },
+      "secComSettings": {
+        "type": "HSAlgoSettings",
+        "size": 256,
+        "secret": "secret"
+      },
+      "cors": {
+        "enabled": false,
+        "allowOrigin": "*",
+        "exposeHeaders": [],
+        "allowHeaders": [],
+        "allowMethods": [],
+        "excludedPatterns": [],
+        "maxAge": null,
+        "allowCredentials": true
+      },
+      "authConfigRef": "e2vwr9aazwalbys829ui050dij86zhvqm4tft6xrkrx5espgzn3f8gqc693u5b8b"
+    },
+    {
+      "id": "SvVghY0tFnUekxsK5EquaaC8L167bi4ZIpQmdVoIbKQpgqCHYTDrxVbfAP8RvaV9",
+      "groupId": "wfy9a7i6lwu7al85fbrwg1u9815957hhoq5wm19sl874jwlvfno7m8nm5tp5rev4",
+      "name": "api",
+      "env": "prod",
+      "domain": "jsc.fr",
+      "subdomain": "api",
+      "targets": [
+        {
+          "host": "127.0.0.1:9000",
+          "scheme": "http"
+        }
+      ],
+      "root": "/api/shows",
+      "matchingRoot": "/shows",
+      "localHost": "localhost:8080",
+      "localScheme": "http",
+      "redirectToLocal": false,
+      "enabled": true,
+      "userFacing": false,
+      "privateApp": false,
+      "forceHttps": false,
+      "maintenanceMode": false,
+      "buildMode": false,
+      "strictlyPrivate": false,
+      "enforceSecureCommunication": false,
+      "sendOtoroshiHeadersBack": true,
+      "secComExcludedPatterns": [],
+      "securityExcludedPatterns": [],
+      "publicPatterns": [],
+      "privatePatterns": [],
+      "additionalHeaders": {
+        "Cookie": "user=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1hdGhpZXVAZm9vLmJhciIsIm5hbWUiOiJKb2huIERvZSIsImlhdCI6MTUzNDQ0ODM4Mn0.S6c_5yKF-QE6KJLCeUg_EJ40ggrXo_9tAYUWS-cMPlE"
+      },
+      "matchingHeaders": {},
+      "ipFiltering": {
+        "whitelist": [],
+        "blacklist": []
+      },
+      "api": {
+        "exposeApi": false
+      },
+      "healthCheck": {
+        "enabled": false,
+        "url": "/"
+      },
+      "clientConfig": {
+        "useCircuitBreaker": true,
+        "retries": 1,
+        "maxErrors": 20,
+        "retryInitialDelay": 50,
+        "backoffFactor": 2,
+        "callTimeout": 30000,
+        "globalTimeout": 30000,
+        "sampleInterval": 2000
+      },
+      "canary": {
+        "enabled": false,
+        "traffic": 0.2,
+        "targets": [],
+        "root": "/"
+      },
+      "metadata": {},
+      "chaosConfig": {
+        "enabled": false,
+        "largeRequestFaultConfig": {
+          "ratio": 0.2,
+          "additionalRequestSize": 0
+        },
+        "largeResponseFaultConfig": {
+          "ratio": 0.2,
+          "additionalResponseSize": 0
+        },
+        "latencyInjectionFaultConfig": {
+          "ratio": 0.2,
+          "from": 0,
+          "to": 0
+        },
+        "badResponsesFaultConfig": {
+          "ratio": 0.2,
+          "responses": []
+        }
+      },
+      "jwtVerifier": {
+        "type": "local",
+        "enabled": false,
+        "strict": true,
+        "excludedPatterns": [],
+        "source": {
+          "type": "InHeader",
+          "name": "X-JWT-Token",
+          "remove": ""
+        },
+        "algoSettings": {
+          "type": "HSAlgoSettings",
+          "size": 512,
+          "secret": "secret"
+        },
+        "strategy": {
+          "type": "PassThrough",
+          "verificationSettings": {
+            "fields": {
+              "iss": "The Issuer"
+            }
+          }
+        }
+      },
+      "secComSettings": {
+        "type": "HSAlgoSettings",
+        "size": 512,
+        "secret": "${config.app.claim.sharedKey}"
+      },
+      "cors": {
+        "enabled": true,
+        "allowOrigin": "*",
+        "exposeHeaders": [],
+        "allowHeaders": [
+          "accept",
+          "authorization"
+        ],
+        "allowMethods": [
+          "GET"
+        ],
+        "excludedPatterns": [],
+        "maxAge": null,
+        "allowCredentials": true
+      },
+      "authConfigRef": null
+    },
+    {
+      "id": "7d8Pf31cVWzHOaMqKdtzVnqJZjWXtWi3lOaXdCQU1VorkUBa5zlrPDtmFThqShwO",
+      "groupId": "default",
+      "name": "www",
+      "env": "prod",
+      "domain": "jsc.fr",
+      "subdomain": "www",
+      "targets": [
+        {
+          "host": "127.0.0.1:9000",
+          "scheme": "http"
+        }
+      ],
+      "root": "/",
+      "matchingRoot": null,
+      "localHost": "localhost:8080",
+      "localScheme": "http",
+      "redirectToLocal": false,
+      "enabled": true,
+      "userFacing": false,
+      "privateApp": false,
+      "forceHttps": false,
+      "maintenanceMode": false,
+      "buildMode": false,
+      "strictlyPrivate": false,
+      "enforceSecureCommunication": false,
+      "sendOtoroshiHeadersBack": true,
+      "secComExcludedPatterns": [],
+      "securityExcludedPatterns": [],
+      "publicPatterns": [
+        "/.*"
+      ],
+      "privatePatterns": [],
+      "additionalHeaders": {},
+      "matchingHeaders": {},
+      "ipFiltering": {
+        "whitelist": [],
+        "blacklist": []
+      },
+      "api": {
+        "exposeApi": false
+      },
+      "healthCheck": {
+        "enabled": false,
+        "url": "/"
+      },
+      "clientConfig": {
+        "useCircuitBreaker": true,
+        "retries": 1,
+        "maxErrors": 20,
+        "retryInitialDelay": 50,
+        "backoffFactor": 2,
+        "callTimeout": 30000,
+        "globalTimeout": 30000,
+        "sampleInterval": 2000
+      },
+      "canary": {
+        "enabled": false,
+        "traffic": 0.2,
+        "targets": [],
+        "root": "/"
+      },
+      "metadata": {},
+      "chaosConfig": {
+        "enabled": false,
+        "largeRequestFaultConfig": {
+          "ratio": 0.2,
+          "additionalRequestSize": 0
+        },
+        "largeResponseFaultConfig": {
+          "ratio": 0.2,
+          "additionalResponseSize": 0
+        },
+        "latencyInjectionFaultConfig": {
+          "ratio": 0.2,
+          "from": 0,
+          "to": 0
+        },
+        "badResponsesFaultConfig": {
+          "ratio": 0.2,
+          "responses": []
+        }
+      },
+      "jwtVerifier": {
+        "type": "local",
+        "enabled": false,
+        "strict": true,
+        "excludedPatterns": [],
+        "source": {
+          "type": "InHeader",
+          "name": "X-JWT-Token",
+          "remove": ""
+        },
+        "algoSettings": {
+          "type": "HSAlgoSettings",
+          "size": 512,
+          "secret": "secret"
+        },
+        "strategy": {
+          "type": "PassThrough",
+          "verificationSettings": {
+            "fields": {
+              "iss": "The Issuer"
+            }
+          }
+        }
+      },
+      "secComSettings": {
+        "type": "HSAlgoSettings",
+        "size": 512,
+        "secret": "${config.app.claim.sharedKey}"
+      },
+      "cors": {
+        "enabled": false,
+        "allowOrigin": "*",
+        "exposeHeaders": [],
+        "allowHeaders": [],
+        "allowMethods": [],
+        "excludedPatterns": [],
+        "maxAge": null,
+        "allowCredentials": true
+      },
+      "authConfigRef": null
+    }
+  ],
+  "errorTemplates": [],
+  "jwtVerifiers": [],
+  "authConfigs": [
+    {
+      "type": "oauth2",
+      "id": "e2vwr9aazwalbys829ui050dij86zhvqm4tft6xrkrx5espgzn3f8gqc693u5b8b",
+      "name": "Keycloak backup config",
+      "desc": "Keycloak backup config",
+      "clientId": "otoroshi-backup",
+      "clientSecret": "c1ee5bef-c9bc-4886-ad7a-bd92aed603dc",
+      "authorizeUrl": "http://keycloak.jsc.fr:8889/auth/realms/master/protocol/openid-connect/auth",
+      "tokenUrl": "http://keycloak.jsc.fr:8889/auth/realms/master/protocol/openid-connect/token",
+      "userInfoUrl": "http://keycloak.jsc.fr:8889/auth/realms/master/protocol/openid-connect/userinfo",
+      "loginUrl": "http://keycloak.jsc.fr:8889/auth/realms/master/protocol/openid-connect/auth",
+      "logoutUrl": "http://keycloak.jsc.fr:8889/auth/realms/master/protocol/openid-connect/logout",
+      "accessTokenField": "access_token",
+      "nameField": "name",
+      "emailField": "email",
+      "otoroshiDataField": "app_metadata | otoroshi_data",
+      "callbackUrl": "http://privateapps.jsc.fr:8080/privateapps/generic/callback"
+    }
+  ]
+}
