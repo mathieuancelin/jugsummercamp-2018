@@ -178,7 +178,7 @@ class AdminOld extends Component {
               <ul className="nav navbar-nav navbar-right">
                 <li>
                   {!this.state.me && <a href="#">Dashboard</a>}
-                  {this.state.me && <a href="#">{this.state.me.issuer}</a>}
+                  {this.state.me && <a href="#">{this.state.me.name}</a>}
                 </li>
               </ul>
               <form className="navbar-form navbar-right">

@@ -149,13 +149,20 @@ function route(app, argv) {
   app.get('/admin/me', (req, res) => {
     if (req.get('Otoroshi-Claim')) {
       const decoded = jsonwebtoken.verify(req.get('Otoroshi-Claim'), secret);
-      res.status(200).send(decoded);
+      res
+        .set('Otoroshi-State-Resp', req.get('Otoroshi-State') || '--')
+        .status(200)
+        .send(decoded);
     } else {
-      res.status(200).send({ issuer: 'Dashboard' });
+      res
+        .set('Otoroshi-State-Resp', req.get('Otoroshi-State') || '--')
+        .status(200)
+        .send({ name: 'Dashboard' });
     }
   });
   app.get('/admin', (req, res) => {
     res
+      .set('Otoroshi-State-Resp', req.get('Otoroshi-State') || '--')
       .status(200)
       .type('html')
       .send(home());

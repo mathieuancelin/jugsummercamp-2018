@@ -52,7 +52,7 @@ client.indices.putTemplate(
   }
 );
 
-const app = express().use(bodyParser.json());
+const app = express().use(bodyParser.json({limit: '300mb'}));
 
 app.post('/api/v1/events', (req, res) => {
   const body = req.body;

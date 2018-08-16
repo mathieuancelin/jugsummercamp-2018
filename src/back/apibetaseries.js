@@ -5,6 +5,7 @@ const BetaSeries = require('./utils/betaseries');
 const connected = require('./utils/connected').connected;
 
 function searchShows(req, res) {
+  console.log('searchShows', req.query.name);
   BetaSeries.seach(req.query.name).then(series => {
     res.status(200).send(series);
   });
