@@ -1,6 +1,7 @@
 import * as Service from "../services";
 import React from "react";
 import { Redirect } from 'react-router-dom';
+import { TopBar } from './Layout';
 
 export default class Login extends React.Component {
 
@@ -38,6 +39,7 @@ export default class Login extends React.Component {
     } else {
       return (
         <div className="container">
+        <TopBar />
         <div className="row">
         <img src={`/assets/img/logo.png`} className="img-responsive center-block logo" />
         </div>

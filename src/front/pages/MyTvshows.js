@@ -1,11 +1,11 @@
 import React from 'react';
 import * as Service from "../services";
 import SearchTvShow from './SearchTvShow'
-import Layout from './Layout';
-import {Link} from 'react-router-dom';
+import { Layout } from './Layout';
+import { Link } from 'react-router-dom';
 import _ from "lodash";
 
-const Experiment = (props) => props[0];
+const Experiment = (props) => props.children[0];
 const Variant = Experiment;
 
 export default class MyTvShows extends React.Component {
@@ -14,13 +14,9 @@ export default class MyTvShows extends React.Component {
     Service.removeTvShow(id);
   };
 
-  markAsWon = () => {
-    Service.notifyWon("mytvshows:gotoepisodes:button");
-  };
-
   render() {
     return (
-      <Layout user={this.props.user} rootPath={this.props.rootPath}>
+      <Layout user={this.props.user}>
         <div className="row" >
           <div className="col-md-12" >
             <div className="row">
@@ -34,14 +30,7 @@ export default class MyTvShows extends React.Component {
                     </div>
                     <div className="media-body">
                       <h3 className="media-heading">{title}</h3>
-                      <Experiment path={"mytvshows:gotoepisodes:button"} notifyDisplay="/api/experiments/displayed" >
-                        <Variant id={"A"}>
-                          <Link to={`/tvshow/${id}`} onClick={this.markAsWon} className="btn pull-right" alt="consulter"><i className="fa fa-eye"></i></Link>
-                        </Variant>
-                        <Variant id={"B"}>
-                          <Link to={`/tvshow/${id}`} onClick={this.markAsWon} className="btn pull-right" alt="consulter"><i className="glyphicon glyphicon-chevron-right"></i></Link>
-                        </Variant>
-                      </Experiment>
+                      <Link to={`/dashboard/tvshow/${id}`} className="btn pull-right" alt="consulter"><i className="fa fa-eye"></i></Link>
                       <button type="button" className="btn pull-right" onClick={this.remove(id)} alt="supprimer"><i className="glyphicon glyphicon-trash"/></button>
                       <p className="description">{_.truncate(description, {length:350})}</p>
                     </div>

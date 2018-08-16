@@ -1,9 +1,9 @@
 import React from "react";
 import * as Service from "../services";
-import Layout from './Layout';
-import {Link} from 'react-router-dom';
+import { Layout } from './Layout';
+import { Link } from 'react-router-dom';
 
-const Feature = (props) => props[0];
+const Feature = (props) => props.children[0];
 const Enabled = Feature;
 const Disabled = Feature;
 
@@ -65,7 +65,7 @@ export default class TvShow extends React.Component {
       );
     const expandId = this.calcExpandId(seasons);
     return (
-      <Layout user={this.props.user}  rootPath={this.props.rootPath}>
+      <Layout user={this.props.user} >
         <div className="row">
           <div className="col-md-12 details">
               <div className="row">
@@ -99,27 +99,20 @@ export default class TvShow extends React.Component {
                         >
                             {`Season ${s.number}`}
                         </a>
-                        <Feature path={"mytvshows:season:markaswatched"}>
-                          <Enabled>
-                            {s.allWatched &&
-                              <button
-                                onClick={this.markSeasonWatched(s.number, false)}
-                                className="btn btn default pull-right addBtn">
-                                  <i className="glyphicon glyphicon-ok"/>
-                              </button>
-                            }
-                            {!s.allWatched &&
-                              <button
-                                onClick={this.markSeasonWatched(s.number, true)}
-                                className="btn btn default pull-right addBtn">
-                                ADD
-                              </button>
-                            }
-                          </Enabled>
-                          <Disabled>
-                            <div></div>
-                          </Disabled>
-                        </Feature>
+                        {s.allWatched &&
+                          <button
+                            onClick={this.markSeasonWatched(s.number, false)}
+                            className="btn btn default pull-right addBtn">
+                              <i className="glyphicon glyphicon-ok"/>
+                          </button>
+                        }
+                        {!s.allWatched &&
+                          <button
+                            onClick={this.markSeasonWatched(s.number, true)}
+                            className="btn btn default pull-right addBtn">
+                            ADD
+                          </button>
+                        }
                     </h4>
                   </div>
                   <div id={`collapse-${s.number}`} className={idx === expandId ? "panel-collapse collapse in": "panel-collapse collapse"} role="tabpanel" aria-labelledby={`heading-${s.number}`}>

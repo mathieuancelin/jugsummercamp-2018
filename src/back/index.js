@@ -1,12 +1,13 @@
 const _ = require('lodash');
 const express = require('express');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 const app = express();
 
 const argv = require('minimist')(process.argv.slice(2));
 const port = process.env.PORT || 9000;
 
-app.use(bodyParser.json(), express.static('public'));
+app.use(cookieParser(), bodyParser.json(), bodyParser.urlencoded({ extended: false }), express.static('public'));
 
 if (!argv.module) {
   ['admin', 'api', 'dashboard', 'web'].map(mod => require(`./${mod}`).route(app, argv));
