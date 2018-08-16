@@ -23,18 +23,26 @@ export function searchTvShow(input) {
     });
 }
 
+export function getTvShow(id) {
+  return fetch(`/api/shows/${id}`)
+    .then((response) => {
+      return response.json();
+    });
+}
+
 const callbacks = [];
 
 export function addTvShow(id) {
-  return fetch(`/api/me/${id}`, {
-    method: 'POST',
-    credentials: 'include',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    }
-  })
-    .then(r => {
+  return getTvShow(id).then(show => {
+    return fetch(`/api/me/${id}`, {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(show)
+    }).then(r => {
       if (r.status === 200) {
         return r.json()
       } else {
@@ -45,6 +53,7 @@ export function addTvShow(id) {
       notifiyUserChanged(u);
       return u;
     });
+  });
 }
 
 export function removeTvShow(id) {

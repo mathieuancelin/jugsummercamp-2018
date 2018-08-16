@@ -10,7 +10,7 @@ const port = process.env.PORT || 9000;
 app.use(cookieParser(), bodyParser.json(), bodyParser.urlencoded({ extended: false }), express.static('public'));
 
 if (!argv.module) {
-  ['admin', 'api', 'dashboard', 'web'].map(mod => require(`./${mod}`).route(app, argv));
+  ['adminold', 'apibetaseries', 'web'].map(mod => require(`./${mod}`).route(app, argv));
   app.listen(port, () => {
     console.log(`jugsummercamp-app listening on port ${port}!`);
   });

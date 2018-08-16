@@ -1,14 +1,22 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
-function route(app, argv) {}
+function home(req, res) {
+  res.status(200).type('html').send(`
+<h1>Admin</h1>  
+  `);
+}
 
-function start(argv, port = 9093) {
+function route(app, argv) {
+  app.get('/admin', home);
+}
+
+function start(argv, port = 9092) {
   const internalApp = express();
   internalApp.use(bodyParser.json(), express.static('public'));
   route(internalApp, argv);
   internalApp.listen(port, () => {
-    console.log(`jugsummercamp-dashboard listening on port ${port}!`);
+    console.log(`jugsummercamp-admin-old listening on port ${port}!`);
   });
 }
 

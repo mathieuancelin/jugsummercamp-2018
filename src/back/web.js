@@ -3,9 +3,11 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const jsonwebtoken = require('jsonwebtoken');
 const _ = require('lodash');
-const BetaSeries = require('./betaseries');
 
-const secret = 'secret';
+const BetaSeries = require('./utils/betaseries');
+const connected = require('./utils/connected').connected;
+const secret = require('./utils/connected').secret;
+
 const users = {};
 
 function head() {
@@ -36,22 +38,6 @@ function home() {
   </html>`;
 }
 
-function connected(req, res, next) {
-  const cookies = req.cookies;
-  const user = cookies.user;
-  if (!user) {
-    res.send(400).send({ error: 'No session' })
-  } else {
-    try {
-      const decoded = jsonwebtoken.verify(user, secret);
-      req.jwt = decoded;
-      next();
-    } catch(e) {
-      res.send(400).send({ error: 'Bad session: ' + e })
-    }
-  }
-}
-
 function login(req, res) {
   res.cookie('user', jsonwebtoken.sign({ email: req.body.email, name: "John Doe" }, secret), { path: '/' }).status(200).send({ done: true });
 }
@@ -67,24 +53,25 @@ function getMe(req, res) {
   res.status(200).send(users[req.jwt.email]);
 }
 
-function searchShows(req, res) {
-  BetaSeries.seach(req.query.name).then(series => {
-    res.status(200).send(series);
-  });
-}
-
 function addSerie(req, res) {
   const serieId = req.params.serieId;
   const user = users[req.jwt.email];
   const alreadyExists = !!_.find(user.shows, s => s.id === serieId);
   if (!alreadyExists) {
-    BetaSeries.get(serieId).then(serie => {
-      users[req.jwt.email].shows.push(serie)
+    console.log(req.body)
+    if (req.body && req.body.id) {
+      users[req.jwt.email].shows.push(req.body)
       res.status(200).send(users[req.jwt.email]);
-    }).catch(e => {
-      console.log(e);
-      res.status(500).send({ error: e.message });
-    });
+    } else {
+      console.log('Should not pass here !!!')
+      BetaSeries.get(serieId).then(serie => {
+        users[req.jwt.email].shows.push(serie)
+        res.status(200).send(users[req.jwt.email]);
+      }).catch(e => {
+        console.log(e);
+        res.status(500).send({ error: e.message });
+      });
+    }
   } else {
     res.status(200).send(users[req.jwt.email]);
   }
@@ -167,7 +154,6 @@ function route(app, argv) {
       .send(home());
   });
   app.post('/api/login', login);
-  app.get('/api/shows/_search', connected, searchShows);
   // me api
   app.get('/api/me', connected, getMe)
   app.post("/api/me/:serieId", connected, addSerie)
