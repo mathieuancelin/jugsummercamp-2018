@@ -86,7 +86,7 @@ class AdminNew extends Component {
 
       point.update(newVal);
     }
-    // setInterval(() => this.update(chart), 2000);
+    setTimeout(() => this.update(chart), 2000);
   };
 
   setupOne = ref => {
