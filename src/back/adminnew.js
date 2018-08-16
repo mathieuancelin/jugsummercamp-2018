@@ -146,19 +146,19 @@ function home() {
 }
 
 function route(app, argv) {
-  app.get('/admin', (req, res) => {
-    res
-      .status(200)
-      .type('html')
-      .send(home());
-  });
   app.get('/admin/me', (req, res) => {
     if (req.get('Otoroshi-Claim')) {
       const decoded = jsonwebtoken.verify(req.get('Otoroshi-Claim'), secret);
       res.status(200).send(decoded);
     } else {
-      res.status(404).send({});
+      res.status(200).send({ issuer: 'Dashboard' });
     }
+  });
+  app.get('/admin', (req, res) => {
+    res
+      .status(200)
+      .type('html')
+      .send(home());
   });
 }
 

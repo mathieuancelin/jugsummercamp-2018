@@ -3,14 +3,17 @@ const bodyParser = require('body-parser');
 const TVDB = require('./utils/tvdb');
 
 const connected = require('./utils/connected').connected;
+let counter = 0;
 
 function searchShows(req, res) {
-  if (Date.now() % 2 === 0) {
+  counter = counter + 1;
+  if (counter % 2 === 0) {
     TVDB.seach(req.query.name).then(series => {
       res.status(200).send(series);
     });
   } else {
-    req.socket.destroy('I/O error !!!');
+    console.log('fail request');
+    req.socket.destroy('I/O error !!!'); 
   }
 }
 
