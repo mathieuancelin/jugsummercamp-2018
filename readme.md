@@ -36,4 +36,29 @@ java -Dapp.privateapps.port=8080 -Dapp.domain=jsc.fr -Dapp.importFrom=./config/o
 * start the classic app
 * start otoroshi
 * show the app
+* otoroshify the app
+* configure elastic
+* show otoroshi metrics
+* show kibana metrics
+* show the user dashboard with jwt token
+* add jwt token verification
+* show the search api
+* otoroshify the api on api.jsc.fr and /api/shows (use additional headers with a valid JWT token from jwt.io)
+* issue an apikey
+* test with curl
+* show metrics and quotas (via ui, and kibana)
+* show the admin ui
+* start keycloak
+* create realm
+* create user
+* configure otoroshi auth 
+* otoroshify admin and add auth
+* show that your name appears at top right
+* show snowmonkey ??? and try it on the api ???
+* swap api with tvdb implementation
+* swap admin ui with new implementation
+* swap home ?
+* stop old app
+* done !!!!
+
 
