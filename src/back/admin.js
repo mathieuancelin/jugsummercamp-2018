@@ -146,7 +146,6 @@ function home() {
 }
 
 function route(app, argv) {
-  app.use('/admin', express.static('public'));
   app.get('/admin', (req, res) => {
     res
       .set('Otoroshi-State-Resp', req.get('Otoroshi-State') || '--')
@@ -168,6 +167,7 @@ function route(app, argv) {
         .send({ name: 'Dashboard' });
     }
   });
+  app.use('/admin', express.static('public'));
 }
 
 function start(argv, port = 9092) {

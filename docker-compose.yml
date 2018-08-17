@@ -88,6 +88,7 @@ services:
     environment: 
       - PORT=8080
       - ES_HOST=elastic
+      - LOG_LEVEL=info
     expose:
       - 8080
     depends_on:

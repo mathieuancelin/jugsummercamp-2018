@@ -43,6 +43,7 @@ java -Dapp.privateapps.port=8080 -Dapp.domain=jsc.fr -Dapp.importFrom=./config/o
   * show otoroshi metrics
   * show otoroshi global metrics
   * show kibana metrics
+    * http://kibana.jsc.fr:8889/app/kibana#/dashboard/75999180-a1f8-11e8-9b2a-4be8eafc82e8?_g=(refreshInterval:(display:Off,pause:!f,value:0),time:(from:now%2Fd,interval:'1m',mode:quick,timezone:Europe%2FBerlin,to:now%2Fd))&_a=(description:'',filters:!(),fullScreenMode:!f,options:(darkTheme:!f,hidePanelTitles:!f,useMargins:!t),panels:!((embeddableConfig:(vis:(legendOpen:!f)),gridData:(h:13,i:'1',w:11,x:0,y:0),id:'40fbc2d0-a1f9-11e8-9b2a-4be8eafc82e8',panelIndex:'1',type:visualization,version:'6.3.0'),(embeddableConfig:(vis:(legendOpen:!f)),gridData:(h:13,i:'2',w:11,x:11,y:0),id:'941ac0b0-a1f9-11e8-9b2a-4be8eafc82e8',panelIndex:'2',type:visualization,version:'6.3.0'),(embeddableConfig:(),gridData:(h:13,i:'3',w:13,x:35,y:0),id:d7daf5e0-a1f9-11e8-9b2a-4be8eafc82e8,panelIndex:'3',type:visualization,version:'6.3.0'),(embeddableConfig:(),gridData:(h:8,i:'4',w:48,x:0,y:22),id:'13de93d0-a1fa-11e8-9b2a-4be8eafc82e8',panelIndex:'4',type:visualization,version:'6.3.0'),(embeddableConfig:(vis:(legendOpen:!f)),gridData:(h:9,i:'5',w:48,x:0,y:13),id:'6e64dd00-a1fa-11e8-9b2a-4be8eafc82e8',panelIndex:'5',type:visualization,version:'6.3.0'),(embeddableConfig:(vis:(legendOpen:!f)),gridData:(h:8,i:'6',w:48,x:0,y:30),id:d963c350-a1fa-11e8-9b2a-4be8eafc82e8,panelIndex:'6',type:visualization,version:'6.3.0'),(embeddableConfig:(vis:(legendOpen:!f)),gridData:(h:9,i:'7',w:48,x:0,y:38),id:'497ea560-a1fb-11e8-9b2a-4be8eafc82e8',panelIndex:'7',type:visualization,version:'6.3.0'),(embeddableConfig:(),gridData:(h:13,i:'8',w:13,x:22,y:0),id:afa32cd0-a1fb-11e8-9b2a-4be8eafc82e8,panelIndex:'8',type:visualization,version:'6.3.0')),query:(language:lucene,query:'%2B@type:+%22GatewayEvent%22'),timeRestore:!f,title:Otoroshi,viewMode:view)
 * show the user dashboard with jwt token
   * otoroshify dashboard `www.jsc.fr:8080/dashboard`
   * add jwt token verification
@@ -72,7 +73,7 @@ java -Dapp.privateapps.port=8080 -Dapp.domain=jsc.fr -Dapp.importFrom=./config/o
 
 ## Todo
 
-* kibana dashboard
 * fix parser config (oto)
+* fix _histogram in ingester :(
 
 

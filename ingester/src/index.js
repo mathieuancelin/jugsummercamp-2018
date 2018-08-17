@@ -53,12 +53,7 @@ client.indices.putTemplate(
   }
 );
 
-const debugMiddleWare = (req, res, next) => {
-  console.log('Request on ', req.path);
-  next();
-};
-
-const app = express().use(bodyParser.json({ limit: JSON_LIMIT }), debugMiddleWare);
+const app = express().use(bodyParser.json({ limit: JSON_LIMIT }));
 
 app.post('/api/v1/events', (req, res) => {
   const body = req.body;
@@ -85,13 +80,12 @@ app.post('/api/v1/events', (req, res) => {
             .type('application/json')
             .status(500);
         } else {
-          console.log(JSON.stringify(resp, null, 2))
+          // console.log(JSON.stringify(resp, null, 2))
           if (resp.errors) {
             res
-              .send(err)
               .type('application/json')
               .status(500)
-              .send(resp)
+              .send(resp);
           } else {
             res
               .status(200)
