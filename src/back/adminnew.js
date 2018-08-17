@@ -146,6 +146,7 @@ function home() {
 }
 
 function route(app, argv) {
+  app.use('/admin', express.static('public'));
   app.get('/admin/me', (req, res) => {
     if (req.get('Otoroshi-Claim')) {
       const decoded = jsonwebtoken.verify(req.get('Otoroshi-Claim'), secret);

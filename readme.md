@@ -72,7 +72,7 @@ java -Dapp.privateapps.port=8080 -Dapp.domain=jsc.fr -Dapp.importFrom=./config/o
 
 ## Todo
 
-* fix ingester and oto metrics
 * kibana dashboard
+* fix parser config (oto)
 
 

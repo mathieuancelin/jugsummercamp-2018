@@ -146,6 +146,7 @@ function home() {
 }
 
 function route(app, argv) {
+  app.use('/admin', express.static('public'));
   app.get('/admin', (req, res) => {
     res
       .set('Otoroshi-State-Resp', req.get('Otoroshi-State') || '--')

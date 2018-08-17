@@ -47,6 +47,12 @@
           },
           "@env": {
             "type": "keyword"
+          },
+          "headersOut.value": {
+            "type": "text"
+          },
+          "headersIn.value": {
+            "type": "text"
           }
         }
       }

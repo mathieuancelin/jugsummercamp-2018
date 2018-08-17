@@ -17,7 +17,10 @@
     },
     "throttlingQuota": 100000,
     "perIpThrottlingQuota": 100000,
-    "analyticsEventsUrl": null,
+    "analyticsEventsUrl": {
+      "url": "http://ingester.jsc.fr:8889/api/v1/events",
+      "headers": {}
+    },
     "analyticsWebhooks": [
       {
         "url": "http://ingester.jsc.fr:8889/api/v1/events",
