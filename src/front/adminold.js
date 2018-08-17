@@ -12,6 +12,12 @@ class AdminOld extends Component {
     fetch('/admin/me').then(r => {
       if (r.status === 200) {
         r.json().then(me => this.setState({ me }));
+      } else {
+        return fetch('/me').then(r => {
+          if (r.status === 200) {
+            r.json().then(me => this.setState({ me }));
+          } 
+        });
       }
     });
   }
