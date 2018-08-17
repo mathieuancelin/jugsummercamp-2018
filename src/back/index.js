@@ -23,7 +23,7 @@ if (!argv.module) {
   (_.isArray(argv.module) ? argv.module : [argv.module]).map(mod => {
     const port = mod.split(':')[1];
     if (port) {
-      require(`./${mod}`).start(argv, port);
+      require(`./${mod.split(':')[0]}`).start(argv, port);
     } else {
       require(`./${mod}`).start(argv);
     }

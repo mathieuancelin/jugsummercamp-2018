@@ -39,7 +39,7 @@ java -Dapp.privateapps.port=8080 -Dapp.domain=jsc.fr -Dapp.importFrom=./config/o
 * show the app
   * otoroshify the app `www.jsc.fr`
 * configure elastic
-  * indroduce some traffic with wrk (wrk2  -t4 -c20 -d500s -R 30 --latency http://www.jsc.fr:8080)
+  * indroduce some traffic with wrk (wrk2  -t4 -c20 -d500s -R 4 --latency http://www.jsc.fr:8080)
   * show otoroshi metrics
   * show otoroshi global metrics
   * show kibana metrics
@@ -83,5 +83,7 @@ java -Dapp.privateapps.port=8080 -Dapp.domain=jsc.fr -Dapp.importFrom=./config/o
 
 * fix parser config (oto)
 * fix _histogram in ingester :(
+* fix admin when in standalone mode
+* fix circuit breaker demo
 
 

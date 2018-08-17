@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 const TVDB = require('./utils/tvdb');
 
 const connected = require('./utils/connected').connected;
@@ -35,7 +36,7 @@ function route(app, argv) {
 
 function start(argv, port = 9094) {
   const internalApp = express();
-  internalApp.use(bodyParser.json(), express.static('public'));
+  internalApp.use(cookieParser(), bodyParser.json(), express.static('public'));
   route(internalApp, argv);
   internalApp.listen(port, () => {
     console.log(`jugsummercamp-api-tvdb listening on port ${port}!`);

@@ -29,7 +29,7 @@ function route(app, argv) {
 
 function start(argv, port = 9093) {
   const internalApp = express();
-  internalApp.use(bodyParser.json(), express.static('public'));
+  internalApp.use(cookieParser(), bodyParser.json(), express.static('public'));
   route(internalApp, argv);
   internalApp.listen(port, () => {
     console.log(`jugsummercamp-api-beta listening on port ${port}!`);
