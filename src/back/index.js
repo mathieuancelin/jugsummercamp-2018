@@ -9,7 +9,7 @@ const port = process.env.PORT || 9000;
 
 app.use(
   cookieParser(),
-  bodyParser.json(),
+  bodyParser.json({ limit: '100mb' }),
   bodyParser.urlencoded({ extended: false }),
   express.static('public')
 );

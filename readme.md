@@ -47,6 +47,7 @@ java -Dapp.privateapps.port=8080 -Dapp.domain=jsc.fr -Dapp.importFrom=./config/o
 * show the user dashboard with jwt token
   * otoroshify dashboard `www.jsc.fr:8080/dashboard`
   * add jwt token verification
+    * rename email then change it
 * show the search api
   * otoroshify the api on `api.jsc.fr` and `www.jsc.fr:8080/api/shows` (use additional headers with a valid JWT token from jwt.io)
   * add cors on the api
