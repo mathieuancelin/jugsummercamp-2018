@@ -68,22 +68,30 @@ java -Dapp.privateapps.port=8080 -Dapp.domain=jsc.fr -Dapp.importFrom=./config/o
     * http://keycloak.jsc.fr:8889/auth/realms/master/protocol/openid-connect/logout
     * http://privateapps.jsc.fr:8080/privateapps/generic/callback
   * otoroshify admin and add auth on `www.jsc.fr:8080/admin`
-  * expose admin on `admin.jsc.fr` other domain and use snow monkey to create a redirect ???
-  * show that your name appears at top right
-* show snowmonkey and try it on the api
-  * add retries js side
+  * expose admin on `admin.jsc.fr` other domain and use snow monkey to create a redirect 
+    * ne pas oublier `/admin/`
+  * show that your name appears at top right when otoroshi exchange proto enabled
 * swap api with tvdb implementation 
   * introduce fake network errors with node to show circuit breaker ?
+* **show snowmonkey and try it on the api ???**
+  * add retries js side
+* swap api with new implementation
+  * yarn start --- --module=apitvdb:9001
+  * change www-api
+  * change api
 * swap admin ui with new implementation
+  * yarn start --- --module=adminnew:9002
+  * change admin
+  * change admin-standalone
 * swap home with new theme
+  * yarn start --- --module=homenew:9003
+  * change www
+  * change www-dashboard
 * stop old app, everything should work
 * and we're done !!!!
 
 ## Todo
 
-* fix parser config (oto)
 * fix _histogram in ingester :(
-* fix admin when in standalone mode
-* fix circuit breaker demo
 
 

@@ -38,7 +38,7 @@ export function me() {
 }
 
 export function searchTvShow(input) {
-  return retry(5, () => fetch(`/api/shows/_search?name=${input}&ts=${new Date().getTime()}`).then(response => {
+  return retry(1, () => fetch(`/api/shows/_search?name=${input}&ts=${new Date().getTime()}`).then(response => {
     if (response.status === 200) {
       return response.json();
     } else {
@@ -48,7 +48,7 @@ export function searchTvShow(input) {
 }
 
 export function getTvShow(id) {
-  return retry(5, () => fetch(`/api/shows/${id}`).then(response => {
+  return retry(1, () => fetch(`/api/shows/${id}`).then(response => {
     if (response.status === 200) {
       return response.json();
     } else {

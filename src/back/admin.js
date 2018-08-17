@@ -167,12 +167,17 @@ function route(app, argv) {
         .send({ name: 'Dashboard' });
     }
   });
-  app.use('/admin', express.static('public'));
+  app.use('/admin/js/bundle', express.static('public/js/bundle'));
 }
 
 function start(argv, port = 9092) {
   const internalApp = express();
-  internalApp.use(bodyParser.json(), express.static('public'));
+  internalApp.use(
+    cookieParser(),
+    bodyParser.json({ limit: '100mb' }),
+    bodyParser.urlencoded({ extended: false }),
+    express.static('public')
+  );
   route(internalApp, argv);
   internalApp.listen(port, () => {
     console.log(`jugsummercamp-admin-old listening on port ${port}!`);
