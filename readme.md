@@ -59,9 +59,16 @@ java -Dapp.privateapps.port=8080 -Dapp.domain=jsc.fr -Dapp.importFrom=./config/o
   * start keycloak
     * create realm
     * create user
+    * log out
   * configure otoroshi auth 
-  * otoroshify admin and add auth 
-  * --- expose admin on `admin.jsc.fr` other domain and use snow monkey to create a redirect ???
+    * http://keycloak.jsc.fr:8889/auth/realms/master/protocol/openid-connect/auth
+    * http://keycloak.jsc.fr:8889/auth/realms/master/protocol/openid-connect/token
+    * http://keycloak.jsc.fr:8889/auth/realms/master/protocol/openid-connect/userinfo
+    * http://keycloak.jsc.fr:8889/auth/realms/master/protocol/openid-connect/auth
+    * http://keycloak.jsc.fr:8889/auth/realms/master/protocol/openid-connect/logout
+    * http://privateapps.jsc.fr:8080/privateapps/generic/callback
+  * otoroshify admin and add auth on `www.jsc.fr:8080/admin`
+  * expose admin on `admin.jsc.fr` other domain and use snow monkey to create a redirect ???
   * show that your name appears at top right
 * show snowmonkey and try it on the api
   * add retries js side

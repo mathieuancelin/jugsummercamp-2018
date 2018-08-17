@@ -1,3 +1,25 @@
+export function retry(nbr, fn, ...args) {
+  return new Promise((success, failure) => {
+    let counter = 0;
+    function tryOnce() {
+      counter = counter + 1
+      fn(...args).then(a => {
+        console.log('Call passed')
+        success(a)
+      }).catch(e => {
+        if (counter < nbr) {
+          console.log('Received failure, retrying one more time : ', e);
+          tryOnce();
+        } else {
+          console.log('Call failed')
+          failure(e);
+        }
+      });
+    }
+    tryOnce();
+  });
+}
+
 export function me() {
   return fetch('/api/me', {
     method: 'GET',
@@ -16,15 +38,23 @@ export function me() {
 }
 
 export function searchTvShow(input) {
-  return fetch(`/api/shows/_search?name=${input}&ts=${new Date().getTime()}`).then(response => {
-    return response.json();
-  });
+  return retry(5, () => fetch(`/api/shows/_search?name=${input}&ts=${new Date().getTime()}`).then(response => {
+    if (response.status === 200) {
+      return response.json();
+    } else {
+      return Promise.reject('Bad status code: ' + response.status)
+    }
+  }));
 }
 
 export function getTvShow(id) {
-  return fetch(`/api/shows/${id}`).then(response => {
-    return response.json();
-  });
+  return retry(5, () => fetch(`/api/shows/${id}`).then(response => {
+    if (response.status === 200) {
+      return response.json();
+    } else {
+      return Promise.reject('Bad status code: ' + response.status)
+    }
+  }));
 }
 
 const callbacks = [];
