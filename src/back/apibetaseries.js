@@ -24,6 +24,7 @@ function getShow(req, res) {
 
 function route(app, argv) {
   app.get('/api/shows/_search', connected, searchShows);
+  app.post('/api/shows/_search', connected, searchShows);
   app.get('/api/shows/:id', connected, getShow);
 }
 

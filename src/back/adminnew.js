@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const jsonwebtoken = require('jsonwebtoken');
+const cookieParser = require('cookie-parser');
 
 const secret = require('./utils/connected').secret;
 
@@ -167,7 +168,10 @@ function route(app, argv) {
       .type('html')
       .send(home());
   });
-  app.use('/admin/js/bundle', express.static('public/js/bundle'));
+  app.use('/admin/js/bundle', (req, res, next) => {
+    res.set('Otoroshi-State-Resp', req.get('Otoroshi-State') || '--');
+    next();
+  }, express.static('public/js/bundle'));
 }
 
 function start(argv, port = 9091) {
@@ -180,7 +184,7 @@ function start(argv, port = 9091) {
   );
   route(internalApp, argv);
   internalApp.listen(port, () => {
-    console.log(`jugsummercamp-admin-old listening on port ${port}!`);
+    console.log(`jugsummercamp-admin-new listening on port ${port}!`);
   });
 }
 

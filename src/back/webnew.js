@@ -179,7 +179,7 @@ function start(argv, port = 9095) {
   );
   route(internalApp, argv);
   internalApp.listen(port, () => {
-    console.log(`jugsummercamp-web listening on port ${port}!`);
+    console.log(`jugsummercamp-web-new listening on port ${port}!`);
   });
 }
 

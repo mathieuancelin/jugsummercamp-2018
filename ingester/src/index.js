@@ -118,17 +118,19 @@ app.get('/api/v1/events', (req, res) => {
 
   const filters = [{ range: { '@timestamp': rangeQuery } }];
   if (serviceId) {
-    filters.push({ term: { '@service.raw': serviceId } });
+    filters.push({ term: { '@serviceId': serviceId } });
   }
   if (type) {
     filters.push({ term: { '@type': type } });
   }
 
+  console.log(JSON.stringify(req.query, null, 2))
+
   client.search(
     {
       index: INDEX_NAME + '-*',
       body: {
-        size: pageSize,
+        //size: pageSize,
         from: pageFrom,
         query: {
           bool: {
@@ -488,8 +490,8 @@ const handleError = (req, res) => func => (err, response) => {
 function calcInterval(req) {
   const from = req.param('from');
   const to = req.param('to');
-  const fromMoment = from ? moment(from) : moment();
-  const toMoment = to ? moment(to) : moment();
+  const fromMoment = from ? moment(from, 'YYYY-MM-DDTHH:mm:ss.SSSZZ') : moment();
+  const toMoment = to ? moment(to, 'YYYY-MM-DDTHH:mm:ss.SSSZZ') : moment();
 
   const duration = moment.duration(toMoment.diff(fromMoment));
   const days = duration.asDays();
@@ -528,7 +530,7 @@ function extractSerie(bucket, name, extract, extra = {}) {
 function prepareFilters(req) {
   const from = req.param('from');
   const to = req.param('to');
-  const toMoment = to ? moment(to) : moment();
+  const toMoment = to ? moment(to, 'YYYY-MM-DDTHH:mm:ss.SSSZZ') : moment();
   const services = req.param('services');
 
   const range = {
@@ -536,7 +538,7 @@ function prepareFilters(req) {
     lte: toMoment.toISOString(),
   };
   if (from) {
-    range['gte'] = moment(from).toISOString();
+    range['gte'] = moment(from, 'YYYY-MM-DDTHH:mm:ss.SSSZZ').toISOString();
   }
   const filters = [
     {
@@ -559,14 +561,14 @@ function prepareFilters(req) {
             bool: {
               must_not: {
                 exists: {
-                  field: '@product',
+                  field: '@serviceId',
                 },
               },
             },
           },
           {
             terms: {
-              '@product': services.split(','),
+              '@serviceId': services.split(','),
             },
           },
         ],

@@ -26,7 +26,7 @@ java -Dapp.privateapps.port=8080 -Dapp.domain=jsc.fr -Dapp.importFrom=./config/o
 * http://ingester.jsc.fr:8889
 * http://www.jsc.fr:8080
 * http://api.jsc.fr:8080 
-* http://admon.jsc.fr:8080 
+* http://admin.jsc.fr:8080 
 * http://otoroshi.jsc.fr:8080
 * http://otoroshi-api.jsc.fr:8080
 * http://privateapps.jsc.fr:8080
@@ -72,9 +72,6 @@ java -Dapp.privateapps.port=8080 -Dapp.domain=jsc.fr -Dapp.importFrom=./config/o
     * ne pas oublier `/admin/`
   * show that your name appears at top right when otoroshi exchange proto enabled
 * swap api with tvdb implementation 
-  * introduce fake network errors with node to show circuit breaker ?
-* **show snowmonkey and try it on the api ???**
-  * add retries js side
 * swap api with new implementation
   * yarn start --- --module=apitvdb:9001
   * change www-api
@@ -84,7 +81,7 @@ java -Dapp.privateapps.port=8080 -Dapp.domain=jsc.fr -Dapp.importFrom=./config/o
   * change admin
   * change admin-standalone
 * swap home with new theme
-  * yarn start --- --module=homenew:9003
+  * yarn start --- --module=webnew:9003
   * change www
   * change www-dashboard
 * stop old app, everything should work

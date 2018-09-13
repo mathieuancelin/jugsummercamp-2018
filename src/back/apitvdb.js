@@ -8,14 +8,14 @@ let counter = 0;
 
 function searchShows(req, res) {
   counter = counter + 1;
-  if (counter % 2 === 0) {
+  //if (counter % 3 === 0) {
     TVDB.seach(req.query.name).then(series => {
       res.status(200).send(series);
     });
-  } else {
-    console.log('fail request');
-    req.socket.destroy('I/O error !!!'); 
-  }
+  //} else {
+  //  console.log('fail request', Date.now());
+  //  req.socket.destroy('I/O error !!!'); 
+  //}
 }
 
 function getShow(req, res) {
@@ -31,6 +31,7 @@ function getShow(req, res) {
 
 function route(app, argv) {
   app.get('/api/shows/_search', connected, searchShows);
+  app.post('/api/shows/_search', connected, searchShows);
   app.get('/api/shows/:id', connected, getShow);
 }
 
